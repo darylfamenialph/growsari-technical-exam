@@ -10,7 +10,7 @@ async function bootstrap() {
 
   app.use((req, res, next) => {
     const authHeader: string = req.headers['authorization'];
-    if (req.originalUrl === '/version') {
+    if (req.originalUrl === '/api/user/login') {
       next();
       return;
     }

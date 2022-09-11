@@ -6,10 +6,7 @@ import { generateAccessTokenService } from './libs/auth/services/generate-access
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly dogFactsFacadeService: DogFactsFacadeService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -19,19 +16,5 @@ export class AppController {
   @Post()
   async generateHash() {
     return passwordHash.generate('hashPassword5');
-  }
-
-  @Post('/token')
-  async generateAccessToken() {
-    return await generateAccessTokenService({
-      userName: 'test-user-1',
-      secretKey: String(process.env.PASS_KEY),
-      expiresIn: '7d',
-    });
-  }
-
-  @Get('/dog-facts')
-  async getDogFacts() {
-    return await this.dogFactsFacadeService.getDogFacts();
   }
 }

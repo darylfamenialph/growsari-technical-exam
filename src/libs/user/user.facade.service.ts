@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { getUserDetailsByTokenService } from './services/get-user-by-token';
 import {
   getUserByUserNameService,
   GetUserByUserNameServiceInput,
@@ -13,5 +14,9 @@ export class UserFacadeService {
 
   async login(input: LoginServiceInput) {
     return loginService(input);
+  }
+
+  async getUserByToken(token: string) {
+    return getUserDetailsByTokenService(token);
   }
 }
