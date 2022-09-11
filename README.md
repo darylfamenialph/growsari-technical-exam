@@ -17,7 +17,7 @@ $ yarn install
 $ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Running app in Docker
