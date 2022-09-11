@@ -18,7 +18,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docker-build": "docker build --no-cache -f ./Dockerfile . -t growsari-technical-exam:latest",
+    "docker-buildx": "docker buildx build --no-cache --platform linux/amd64 -f ./Dockerfile . -t growsari-technical-exam:latest",
+    "docker-run": "docker run -d --name growsari-app --env-file .env -p 3005:3005 growsari-technical-exam:latest"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",

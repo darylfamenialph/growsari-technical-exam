@@ -20,6 +20,20 @@ $ yarn start:dev
 $ npm run start:prod
 ```
 
+## Running app in Docker
+
+```bash
+# Building in x86 processors
+$ yarn docker-build
+
+# Building in Apple M1 chip
+$ yarn docker-buildx
+
+# Run Docker app
+$yarn docker-run
+
+```
+
 ## Test
 
 ```bash
