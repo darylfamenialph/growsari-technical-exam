@@ -10,6 +10,14 @@ describe('get User by Username', () => {
       password: 'sha1$5a7e1004$1$21e54fd1076ff94e95d1f892bbdca200602a1ba6',
       name: 'Test User 1',
       status: 'active',
+      address: {
+        _id: 'useradd1',
+        barangay: 'test barangay',
+        city: 'test city',
+        province: 'test province',
+        streetAddress: 'test street address',
+        zip: 'test zip',
+      },
     };
     it('should return user object', async () => {
       const result = await getUserByUserNameService({ userName });
@@ -19,7 +27,7 @@ describe('get User by Username', () => {
 
   describe('null user', () => {
     const userName = 'test-user-12';
-    it('should return user object', async () => {
+    it('should return null', async () => {
       const result = await getUserByUserNameService({ userName });
       expect(result).toEqual(null);
     });

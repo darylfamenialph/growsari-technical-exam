@@ -1,3 +1,4 @@
+import { MockAddress } from '../user-address.model';
 import { MockUsers } from '../user.model';
 
 export interface GetUserByUserNameServiceInput {
@@ -12,7 +13,20 @@ export const getUserByUserNameService = async ({
     if (!user) {
       return null;
     }
-    return user;
+    const fetchedAddress = MockAddress.find(
+      (mockAddress) => mockAddress._id === user.userAddressId,
+    );
+
+    const fullUserDetails = {
+      _id: user._id,
+      username: user.username,
+      password: user.password,
+      name: user.name,
+      status: user.status,
+      address: fetchedAddress,
+    };
+
+    return fullUserDetails;
   } catch (err) {
     throw new Error(err);
   }
