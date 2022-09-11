@@ -23,10 +23,7 @@ export const validateTokenService = async ({
         message: 'Authorization Token has invalid format',
         isError: true,
       };
-    const decoded: Record<string, any> = jwt.verify(
-      token,
-      String(process.env.PASS_KEY),
-    );
+    const decoded: any = jwt.verify(token, String(process.env.PASS_KEY));
 
     if (!decoded)
       return {
