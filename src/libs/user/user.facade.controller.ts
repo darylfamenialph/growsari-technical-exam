@@ -51,7 +51,7 @@ export class UserFacadeController {
     }
   }
 
-  @Post()
+  @Get()
   async getUserByToken(@Req() req: Request, @Res() res: Response) {
     try {
       const authHeader: string = req.headers['authorization'];
