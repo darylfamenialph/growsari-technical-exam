@@ -1,6 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { getUserByUserNameService } from '../../user/services/get-user-by-username';
+import * as passwordHash from 'password-hash';
 
 export interface ValidateTokenServiceInput {
   token: string;
@@ -33,7 +34,7 @@ export const validateTokenService = async ({
       };
 
     const tokenDetails = await getUserByUserNameService({
-      userName: decoded.username,
+      userName: decoded.userName,
     });
 
     if (!tokenDetails) {
@@ -43,12 +44,6 @@ export const validateTokenService = async ({
         isError: true,
       };
     }
-    if (!(decoded.password === tokenDetails.password))
-      return {
-        status: HttpStatus.UNAUTHORIZED,
-        message: 'User token is not valid.',
-        isError: true,
-      };
 
     return {
       status: HttpStatus.OK,
@@ -56,6 +51,14 @@ export const validateTokenService = async ({
       isError: false,
     };
   } catch (err) {
-    throw new Error(err);
+    if (err.message === 'invalid signature') {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        message: 'Token has invalid signature.',
+        isError: true,
+      };
+    } else {
+      throw new Error(err);
+    }
   }
 };

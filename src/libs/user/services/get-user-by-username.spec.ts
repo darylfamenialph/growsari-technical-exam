@@ -7,7 +7,7 @@ describe('get User by Username', () => {
     const expectedResult = {
       _id: 'testId1',
       username: 'test-user-1',
-      password: 'hashPassword1',
+      password: 'sha1$5a7e1004$1$21e54fd1076ff94e95d1f892bbdca200602a1ba6',
       name: 'Test User 1',
       status: 'active',
     };

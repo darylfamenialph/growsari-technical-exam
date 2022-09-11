@@ -8,45 +8,45 @@ async function bootstrap() {
 
   app.enableCors();
 
-  app.use((req, res, next) => {
-    const authHeader: string = req.headers['authorization'];
-    if (req.originalUrl === '/version') {
-      next();
-      return;
-    }
+  // app.use((req, res, next) => {
+  //   const authHeader: string = req.headers['authorization'];
+  //   if (req.originalUrl === '/version') {
+  //     next();
+  //     return;
+  //   }
 
-    const auth = authHeader?.split(' ');
+  //   const auth = authHeader?.split(' ');
 
-    if (!auth || auth.length < 2) {
-      res.status(HttpStatus.FORBIDDEN).json({
-        status: HttpStatus.FORBIDDEN,
-        message: 'Authorization Header is required and should be valid.',
-      });
-      return;
-    }
+  //   if (!auth || auth.length < 2) {
+  //     res.status(HttpStatus.FORBIDDEN).json({
+  //       status: HttpStatus.FORBIDDEN,
+  //       message: 'Authorization Header is required and should be valid.',
+  //     });
+  //     return;
+  //   }
 
-    if (auth[0] !== 'Bearer') {
-      res.status(HttpStatus.FORBIDDEN).json({
-        status: HttpStatus.FORBIDDEN,
-        message: 'Authorization Type not supported.',
-      });
-      return;
-    }
+  //   if (auth[0] !== 'Bearer') {
+  //     res.status(HttpStatus.FORBIDDEN).json({
+  //       status: HttpStatus.FORBIDDEN,
+  //       message: 'Authorization Type not supported.',
+  //     });
+  //     return;
+  //   }
 
-    const authService = app.get<AuthFacadeService>(AuthFacadeService);
-    authService.validateToken({ token: auth[1] }).then((result) => {
-      if (result.isError) {
-        res.status(HttpStatus.FORBIDDEN).json({
-          status: HttpStatus.FORBIDDEN,
-          message: result.message,
-          timestamp: new Date(),
-        });
-        return;
-      }
-      next();
-    });
-  });
+  //   const authService = app.get<AuthFacadeService>(AuthFacadeService);
+  //   authService.validateToken({ token: auth[1] }).then((result) => {
+  //     if (result.isError) {
+  //       res.status(HttpStatus.FORBIDDEN).json({
+  //         status: HttpStatus.FORBIDDEN,
+  //         message: result.message,
+  //         timestamp: new Date(),
+  //       });
+  //       return;
+  //     }
+  //     next();
+  //   });
+  // });
 
-  await app.listen(3000);
+  await app.listen(3005);
 }
 bootstrap();
